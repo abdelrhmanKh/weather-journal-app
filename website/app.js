@@ -2,7 +2,7 @@
 
 /* Global Variables */
 const baseUrl = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-const apikey = '&appid=66de3baec29a5246aadb9394ea613c5e';
+const apikey = '&appid=66de3baec29a5246aadb9394ea613c5e&units=metric';
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
@@ -21,17 +21,25 @@ function preformAction(e) {
     getZipWeather(baseUrl, zipcode, country, apikey)
 
         .then(function (data) {
+            if (data.cod == "404") {
+                alert("please enter availd zip code, Please Check you entered the Right zip code For Right country.");
+            } else {
+                console.log(data);
+                //calling the function to post data 
+                postData('/add', {
+                    date: newDate,
+                    temp: data.main.temp,
+                    content: theFeeling
+                });
+                //to update ui after getting data
+                upDateUi();
+            }
 
-            console.log(data);
-            //calling the function to post data 
-            postData('/add', {
-                date: newDate,
-                temp: data.main.temp,
-                content: theFeeling
-            });
-            //to update ui after getting data
-            upDateUi();
+
+
         })
+
+
 };
 //  function to get data from web api 
 
@@ -82,7 +90,7 @@ const upDateUi = async () => {
         const SavedData = await request.json();
         console.log(SavedData)
         datefield.innerHTML = `Date :${SavedData.date}`;
-        tempfield.innerHTML = `Temperature :${SavedData.temp}`;
+        tempfield.innerHTML = `Temperature :${SavedData.temp}&#8451;`;
         contentfield.innerHTML = `I am felling  :${SavedData.content}`;
 
     } catch (E) {
