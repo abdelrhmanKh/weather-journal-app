@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Store Sync</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <h1>Store Sync</h1>
+    <p><a href="/">Back to Weather Journal</a></p>
+    <div><strong>Provider:</strong> <span id="providerType">-</span></div>
+    <div><strong>Connection:</strong> <span id="connectionStatus">-</span></div>
+    <div><strong>Environment:</strong> <span id="configStatus">-</span></div>
+    <div><strong>Last Sync:</strong> <span id="lastSync">Never</span></div>
+
+    <button id="syncIncremental">Run Incremental Sync</button>
+    <button id="syncFull">Run Full Sync</button>
+
+    <h3>Trust Warnings</h3>
+    <ul id="warnings"></ul>
+
+    <h3>Diagnostics Summary</h3>
+    <pre id="diagnostics"></pre>
+
+    <h3>Raw Payload Preview</h3>
+    <pre id="rawProducts"></pre>
+    <pre id="rawOrders"></pre>
+  </div>
+  <script src="store-sync.js"></script>
+</body>
+</html>
